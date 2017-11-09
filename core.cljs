@@ -5,4 +5,5 @@
   (-> (.connect client)
       (.then (fn []
                (-> (.query client "SELECT NOW()")
-                   (.then #(js/console.log %)))))))
+                   (.then #(js/console.log (-> % .-rows first .-now))))))
+      (.then #(.end client))))
